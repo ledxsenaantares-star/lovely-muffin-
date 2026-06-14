@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Precious Muffin ♡</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:linear-gradient(135deg,#ffdce7,#fff8f1);overflow:hidden;height:100vh}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px;transition:1s}
+.hidden{opacity:0;pointer-events:none}
+h1{color:#b86b82;margin-bottom:15px}
+.subtitle{color:#8d6673;line-height:1.8;font-size:1.1rem}
+button{margin-top:35px;padding:14px 30px;border:none;border-radius:50px;background:#d38aa1;color:white;cursor:pointer}
+.envelope{font-size:120px}
+.heart{position:absolute;color:#ffb6c1;animation:fall linear infinite;opacity:.8}
+@keyframes fall{from{transform:translateY(-100px)}to{transform:translateY(120vh)}}
+.letter-box{max-width:800px;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);padding:35px;border-radius:25px}
+.typewriter{white-space:pre-wrap;line-height:2;color:#555;text-align:left}
+.end-text{font-size:2rem;color:#c77d96;line-height:2}
+.favorite{font-size:1.8rem;color:#c77d96;margin-bottom:20px}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+<section id="opening" class="screen">
+<div class="envelope">💌</div>
+<h1>To: my precious, muffin ♡</h1>
+<p class="subtitle">From: forever yours, cupcake ♡</p>
+<button onclick="startLetter()">Open when you're ready</button>
+</section>
+
+<section id="letterPage" class="screen hidden">
+<div class="letter-box">
+<h2 id="title">Surat 1</h2><br>
+<div id="content" class="typewriter"></div>
+<button id="nextBtn" style="display:none;" onclick="nextLetter()">Next ♡</button>
+</div>
+</section>
+
+<section id="ending" class="screen hidden">
+<div class="favorite">You're still my favorite person.</div>
+<p class="subtitle">Thank you for reading until the end, muffin. ♡</p>
+<button onclick="showFinal()">Close Letter</button>
+</section>
+
+<section id="finalPage" class="screen hidden">
+<div class="end-text">I love you.<br>Always.<br><br>♡</div>
+</section>
+
+<script>
+const letters=[
+`sebenarnya aku malu harus kirim ini sebagai permintaan maaf bukan sebagai sesuatu yang romantis, tapi rasanya sulit mengungkapkan hal ini melalui pesan secara langsung...`,
+`"sana sama yang bisa ngertiin kamu"... loving me is that hard yaa, kaa?? :((
+
+after reading that, my heart felt like it was being gripped tightly by chains, sakit dan sedih secara bersamaan, tapi aku mengakui aku juga salah besar di sini...
+
+aku minta maaf kalau aku serumit itu untuk dicintai yaa, kaa. mungkin aku belum pantas untuk dicintai yaa, kaa?? aku harus memperbaiki diri aku sendiri dulu yaa, kaa?? aku minta maaf karena sudah menyakiti perasaan kamu lagii..
+
+entah apa yang kamu rasakan sampai melontarkan kata-kata seperti itu.. sudah muak yaa, kaa?? aku menyesal jadi serumit ini, kaa.
+
+I hope that wasn't said seriously, kaa, kalaupun iyaa... aku lebih memilih untuk sendiri. tolong bertahan lebih lama lagi sama aku, kaa.. aku juga akan berusaha untuk bertahan lebih lama sama kamu.
+
+oh gosh, aku sambil nangis ketiknya haha. serumit itu yaa, kaa, sampai rela menyuruh aku sama yang lain??? lemme know kalau kamu sudah ga sanggup yaa..
+
+I just miss you, kaa.`,
+`at the same time, aku mau berterima kasih karena kamu selalu berusaha untuk mencintai aku, menyayangi aku, mengerti aku, dan memahami aku sehebat itu.
+
+you're a wonderful person, I always love you ♡`
+];
+let current=0;
+function startLetter(){opening.classList.add('hidden');letterPage.classList.remove('hidden');showLetter();}
+function typeWriter(text,el,s=20){el.innerHTML='';let i=0;let t=setInterval(()=>{el.innerHTML+=text.charAt(i);i++;if(i>=text.length){clearInterval(t);nextBtn.style.display='inline-block';}},s);}
+function showLetter(){nextBtn.style.display='none';title.innerText='Surat '+(current+1);typeWriter(letters[current],content);}
+function nextLetter(){current++;if(current<letters.length){showLetter()}else{letterPage.classList.add('hidden');ending.classList.remove('hidden');}}
+function showFinal(){ending.classList.add('hidden');finalPage.classList.remove('hidden');}
+function createHeart(){let h=document.createElement('div');h.className='heart';h.innerHTML='♡';h.style.left=Math.random()*100+'vw';h.style.fontSize=(15+Math.random()*25)+'px';h.style.animationDuration=(5+Math.random()*8)+'s';hearts.appendChild(h);setTimeout(()=>h.remove(),13000);}
+setInterval(createHeart,500);
+</script>
+</body>
+</html>
